@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Tugas - Muhamad Roofi Fuadi</title>
+
+  <style>
+    :root {
+      --sunset-yellow: #ffd23f;
+      --lime-fresh: #a8e6cf;
+      --emerald-deep: #2d5a47;
+      --chartreuse: #c6e48b;
+      --mint-gold: #e6ff9a;
+      --shadow-sunset: 0 20px 50px rgba(255, 210, 63, 0.35);
+      --white: rgba(255, 255, 255, 0.92);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Roboto', 'Helvetica', Arial, sans-serif;
+      background: linear-gradient(
+        135deg,
+        var(--sunset-yellow) 0%,
+        var(--lime-fresh) 45%,
+        var(--mint-gold) 100%
+      );
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 25px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 10% 90%, rgba(255, 210, 63, 0.4) 0%, transparent 40%),
+        radial-gradient(circle at 90% 10%, rgba(168, 230, 207, 0.35) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(198, 228, 139, 0.25) 0%, transparent 50%);
+      animation: sunPulse 7s ease-in-out infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    @keyframes sunPulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.05); }
+    }
+
+    .container {
+      background: var(--white);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      padding: 60px 50px;
+      border-radius: 36px;
+      box-shadow: var(--shadow-sunset);
+      max-width: 760px;
+      width: 100%;
+      border: 2px solid rgba(255, 210, 63, 0.35);
+      position: relative;
+      z-index: 2;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .sun-icon {
+      font-size: 4rem;
+      background: linear-gradient(
+        135deg,
+        var(--sunset-yellow) 0%,
+        var(--chartreuse) 50%,
+        var(--lime-fresh) 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 18px;
+      display: inline-block;
+      animation: sunRise 3s ease-out infinite alternate;
+      filter: drop-shadow(0 6px 20px rgba(255, 210, 63, 0.5));
+    }
+
+    @keyframes sunRise {
+      from { transform: translateY(0px) scale(1); }
+      to { transform: translateY(-8px) scale(1.06); }
+    }
+
+    h1 {
+      color: var(--emerald-deep);
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      text-shadow: 0 4px 18px rgba(45, 90, 71, 0.18);
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      color: #4a7c59;
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .prodi {
+      color: #e29f05;
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .daftar-buttons {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .tugas-btn {
+      position: relative;
+      padding: 24px 28px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: 3px solid rgba(255, 255, 255, 0.7);
+      border-radius: 26px;
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      transition: all 0.35s ease;
+      overflow: hidden;
+      font-family: inherit;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+      color: var(--emerald-deep);
+      min-height: 92px;
+    }
+
+    .tugas-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.55),
+        transparent
+      );
+      opacity: 0;
+      transform: translateX(-120%);
+      transition: transform 0.8s ease, opacity 0.8s ease;
+    }
+
+    .tugas-btn:hover::before {
+      opacity: 1;
+      transform: translateX(120%);
+    }
+
+    .tugas-btn:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .tugas1 {
+      background: linear-gradient(135deg, var(--lime-fresh) 0%, var(--chartreuse) 100%);
+    }
+
+    .tugas1:hover {
+      box-shadow: 0 25px 50px rgba(168, 230, 207, 0.45);
+    }
+
+    .tugas2 {
+      background: linear-gradient(135deg, var(--sunset-yellow) 0%, var(--mint-gold) 100%);
+    }
+
+    .tugas2:hover {
+      box-shadow: 0 25px 50px rgba(255, 210, 63, 0.45);
+    }
+
+    .tugas3 {
+      background: linear-gradient(135deg, #d8f3dc 0%, #b7e4c7 100%);
+    }
+
+    .tugas3:hover {
+      box-shadow: 0 25px 50px rgba(168, 230, 207, 0.4);
+    }
+
+    .tugas4 {
+      background: linear-gradient(135deg, #fff3b0 0%, #fde68a 100%);
+    }
+
+    .tugas4:hover {
+      box-shadow: 0 25px 50px rgba(255, 210, 63, 0.4);
+    }
+
+    .tugas5 {
+      background: linear-gradient(135deg, #c7f9cc 0%, #95d5b2 100%);
+    }
+
+    .tugas5:hover {
+      box-shadow: 0 25px 50px rgba(149, 213, 178, 0.45);
+    }
+
+    .btn-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+      filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.18));
+    }
+
+    .btn-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      text-align: left;
+    }
+
+    .btn-title {
+      font-size: 1.05rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .btn-subtitle {
+      font-size: 0.92rem;
+      opacity: 0.95;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    footer {
+      margin-top: 30px;
+      color: var(--emerald-deep);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-align: center;
+      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 18px;
+      }
+
+      .container {
+        padding: 40px 22px;
+        border-radius: 28px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .sun-icon {
+        font-size: 3.2rem;
+      }
+
+      .tugas-btn {
+        padding: 20px;
+        min-height: auto;
+      }
+
+      .btn-title {
+        font-size: 0.98rem;
+      }
+
+      .btn-subtitle {
+        font-size: 0.86rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <div class="sun-icon">🌟</div>
+      <h1>Muhamad Roofi Fuadi</h1>
+      <p class="subtitle">Sistem Informasi Manajemen</p>
+      <p class="prodi">Sosial Ekonomi Perikanan</p>
+      <p class="prodi">Universitas Lambung Mangkurat</p>
+    </header>
+
+    <section class="daftar-buttons" aria-label="Daftar tugas">
+      <a href="page 1.html" class="tugas-btn tugas1" target="_blank" rel="noopener noreferrer">
+        <span class="btn-icon">📊</span>
+        <span class="btn-text">
+          <span class="btn-title">Tugas 1</span>
+          <span class="btn-subtitle">Biodata Diri</span>
+        </span>
+      </a>
+
+      <a href="page 2.html" class="tugas-btn tugas2" target="_blank" rel="noopener noreferrer">
+        <span class="btn-icon">🏦</span>
+        <span class="btn-text">
+          <span class="btn-title">Tugas 2</span>
+          <span class="btn-subtitle">Formulir Transaksi</span>
+        </span>
+      </a>
+
+      <a href="page 3.html" class="tugas-btn tugas3" target="_blank" rel="noopener noreferrer">
+        <span class="btn-icon">📋</span>
+        <span class="btn-text">
+          <span class="btn-title">Tugas 3</span>
+          <span class="btn-subtitle">Google Form</span>
+        </span>
+      </a>
+
+      <a href="https://forms.gle/NDpS8VUWQAT2WZRF8" class="tugas-btn tugas4" target="_blank" rel="noopener noreferrer">
+        <span class="btn-icon">📋</span>
+        <span class="btn-text">
+          <span class="btn-title">Tugas 4</span>
+          <span class="btn-subtitle">Tingkat Kepuasan Penggunaan Dompet Digital (DANA)</span>
+        </span>
+      </a>
+
+      <a href="page 4.html" class="tugas-btn tugas5" target="_blank" rel="noopener noreferrer">
+        <span class="btn-icon">📋</span>
+        <span class="btn-text">
+          <span class="btn-title">Tugas 5</span>
+          <span class="btn-subtitle">Tugas Akhir</span>
+        </span>
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <p>🌞 Tugas SIM-P | Dibuat untuk memenuhi tugas Bapak Muhammad Adnan Zain, S.Pi, M.P</p>
+  </footer>
+</body>
+</html>

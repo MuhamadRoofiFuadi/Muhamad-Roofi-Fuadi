@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tugas Individu 5 - Data Rencana Usaha Kelompok</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f3f6fb;
+      color: #1e293b;
+    }
+
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 260px;
+      background: #0f172a;
+      color: #fff;
+      position: fixed;
+      height: 100vh;
+      left: 0;
+      top: 0;
+      padding: 24px 18px;
+      overflow-y: auto;
+      transition: width 0.3s ease;
+    }
+
+    .sidebar.collapsed {
+      width: 72px;
+      padding: 24px 10px;
+    }
+
+    .brand {
+      background: #020617;
+      padding: 20px;
+      border-radius: 14px;
+      margin-bottom: 24px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar.collapsed .brand {
+      padding: 14px 8px;
+    }
+
+    .brand h2 {
+      font-size: 18px;
+      margin-bottom: 6px;
+      color: #38bdf8;
+    }
+
+    .brand p {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .menu-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #64748b;
+      margin: 18px 0 10px;
+      font-weight: 700;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav {
+      list-style: none;
+    }
+
+    .nav li {
+      margin-bottom: 8px;
+    }
+
+    .nav a {
+      display: block;
+      padding: 12px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #cbd5e1;
+      transition: .3s;
+      border-left: 4px solid transparent;
+      font-size: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      background: #1e293b;
+      color: #fff;
+      border-left-color: #38bdf8;
+    }
+
+    .sidebar.collapsed .nav a {
+      text-align: center;
+      padding: 12px 8px;
+      font-size: 18px;
+      border-left: 0;
+    }
+
+    .sidebar.collapsed .brand p,
+    .sidebar.collapsed .menu-title,
+    .sidebar.collapsed .nav a .text {
+      display: none;
+    }
+
+    .content {
+      margin-left: 260px;
+      width: calc(100% - 260px);
+      padding: 28px;
+      transition: margin-left 0.3s ease, width 0.3s ease;
+    }
+
+    .content.collapsed {
+      margin-left: 72px;
+      width: calc(100% - 72px);
+    }
+
+    .header {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: white;
+      padding: 22px 24px;
+      border-radius: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 20px rgba(2, 132, 199, 0.18);
+      gap: 14px;
+    }
+
+    .header h1 {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .header p {
+      font-size: 13px;
+      color: #e0f2fe;
+    }
+
+    .toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 10px;
+      background: #0f172a;
+      color: white;
+      cursor: pointer;
+      font-size: 18px;
+      flex-shrink: 0;
+      transition: .3s;
+    }
+
+    .toggle-btn:hover {
+      background: #1e293b;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 11px 18px;
+      background: #10b981;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 13px;
+      transition: .3s;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      background: #059669;
+    }
+
+    .section {
+      background: white;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+      margin-bottom: 24px;
+    }
+
+    .section h2 {
+      font-size: 18px;
+      color: #0f172a;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .status-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 14px;
+      color: #475569;
+    }
+
+    iframe {
+      width: 100%;
+      max-width: 100%;
+      border: 0;
+      border-radius: 12px;
+      margin-top: 14px;
+      min-height: 520px;
+    }
+
+    @media (max-width: 900px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+      }
+
+      .sidebar.collapsed {
+        width: 100%;
+      }
+
+      .content,
+      .content.collapsed {
+        margin-left: 0;
+        width: 100%;
+      }
+
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+      }
+
+      .sidebar.collapsed .brand p,
+      .sidebar.collapsed .menu-title,
+      .sidebar.collapsed .nav a .text {
+        display: inline;
+      }
+
+      .sidebar.collapsed .nav a {
+        text-align: left;
+        padding: 12px 14px;
+        font-size: 14px;
+        border-left: 4px solid transparent;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <h2>Tugas Individu 5</h2>
+        <p>Data Rencana Usaha Kelompok</p>
+      </div>
+
+      <div class="menu-title">Navigasi</div>
+      <ul class="nav">
+        <li><a href="#beranda" class="active">🏠 <span class="text">Beranda</span></a></li>
+        <li><a href="#form-data">📝 <span class="text">Form Data</span></a></li>
+        <li><a href="#tabel-data">📊 <span class="text">Tabel Data</span></a></li>
+        <li><a href="#kepuasan">📋 <span class="text">Kepuasan</span></a></li>
+        <li><a href="#dashboard">📈 <span class="text">Dashboard</span></a></li>
+      </ul>
+    </aside>
+
+    <main class="content" id="content">
+      <div class="header" id="beranda">
+        <button class="toggle-btn" id="toggleSidebar">☰</button>
+        <div style="flex:1;">
+          <h1>Data Rencana Usaha Kelompok</h1>
+          <p>Halaman ini menampilkan form input, data spreadsheet, form kepuasan, dan dashboard.</p>
+        </div>
+        <a href="https://faroukmuhamad-gif.github.io/DEMO-TUGAS/" class="btn">Kembali ke Beranda</a>
+      </div>
+
+      <section class="section" id="form-data">
+        <h2>Form Rencana Usaha Kelompok</h2>
+        <div class="status-box">
+          <p>Bagian ini digunakan untuk mencatat rencana usaha kelompok KUB.</p>
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLScDTz15Epj0SbRUsKdMchSc96J10E2PsmzGHWSVmeYnWIMI_w/viewform?embedded=true"
+            loading="lazy">
+            Loading…
+          </iframe>
+        </div>
+      </section>
+
+      <section class="section" id="tabel-data">
+        <h2>Data Rencana Usaha Kelompok</h2>
+        <div class="status-box">
+          <p>Menampilkan data yang sudah diisi, jumlah entri, dan data terbaru.</p>
+          <iframe
+            src="https://docs.google.com/spreadsheets/d/1A8PM9uKE_4rWS2uU7h8O4KuzKgYiPC4PrzFJYXV_Qso/edit?usp=sharing"
+            loading="lazy">
+            Loading…
+          </iframe>
+        </div>
+      </section>
+
+      <section class="section" id="kepuasan">
+        <h2>Form Kepuasan Pengisian Formulir</h2>
+        <div class="status-box">
+          <p>Bagian ini digunakan untuk menilai kemudahan, kelengkapan, dan kenyamanan saat mengisi formulir.</p>
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSeDLcNnqyXmvnSTE7xwAtwnvXrXLlxIu8dt_3zYhGK6hDcWdg/viewform?embedded=true"
+            loading="lazy">
+            Loading…
+          </iframe>
+        </div>
+      </section>
+
+      <section class="section" id="dashboard">
+        <h2>Looker Studio Data Rencana Usaha Kelompok KUB</h2>
+        <div class="status-box">
+          <p>Hasil chart data rencana usaha kelompok KUB.</p>
+          <iframe
+            src="https://datastudio.google.com/embed/reporting/ae684f38-2ca5-44b7-8110-48a81aa8178b/page/p_apk34id63d"
+            loading="lazy">
+            Loading…
+          </iframe>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    const toggleSidebar = document.getElementById('toggleSidebar');
+
+    toggleSidebar.addEventListener('click', () => {
+      sidebar.classList.toggle('collapsed');
+      content.classList.toggle('collapsed');
+    });
+  </script>
+</body>
+</html>
